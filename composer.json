@@ -1,0 +1,25 @@
+{
+    "name": "pluckypenguinphil/battlesnake",
+    "description": "A battle snake written in PHP",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pluckypenguinphil\\Battlesnake\\": "src/"
+        },
+      "files": [
+        "src/helpers.php"
+      ]
+    },
+    "require": {
+      "ext-pdo": "*"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.4"
+    },
+  "scripts": {
+    "post-install-cmd": [
+      "php src/Console/initialize-database.php"
+    ]
+  }
+}
