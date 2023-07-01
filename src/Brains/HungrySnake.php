@@ -61,7 +61,7 @@ class HungrySnake implements IBrain
      * Flood fill the grid to find the closest item of food, and the path to it.
      *
      * @param  string  $startCellId
-     *
+     * helo
      * @return array
      */
     protected function floodFillGrid(string $startCellId): array
