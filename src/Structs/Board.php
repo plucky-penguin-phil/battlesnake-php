@@ -88,7 +88,7 @@ class Board extends Struct
         }
         $cellId = cid($x, $y);
         if (array_key_exists(cid($x, $y), $this->cells)) {
-            error_log("Loading cell from cache: " . cid($x, $y), E_USER_NOTICE);
+            error_log("Loading cell from cache: ".cid($x, $y), E_USER_NOTICE);
             return $this->cells[$cellId];
         }
         $this->cells[$cellId] = new Cell(['x' => $x, 'y' => $y, 'contents' => $this->getCellContents($x, $y)]);
@@ -190,5 +190,28 @@ class Board extends Struct
         }
 
         error_log($str, E_USER_NOTICE);
+    }
+
+    /**
+     * Retrieve the snake which is currently lying in the given cell.
+     *
+     * @param  \Pluckypenguinphil\Battlesnake\Structs\Cell  $cell
+     *
+     * @return \Pluckypenguinphil\Battlesnake\Structs\Snake|null
+     */
+    public function getSnakeAtPosition(Cell $cell): ?Snake
+    {
+        /** @var \Pluckypenguinphil\Battlesnake\Structs\Snake $snake */
+        foreach ($this->snakes as $snake) {
+            if ($snake->head['x'] === $cell->x & $snake->head['y'] === $cell->y) {
+                return $snake;
+            }
+            foreach ($snake->body as $bodyCell) {
+                if ($bodyCell['x'] === $snake->x && $bodyCell['y'] === $snake->y) {
+                    return $snake;
+                }
+            }
+        }
+        return null;
     }
 }

@@ -7,6 +7,7 @@ use Pluckypenguinphil\Battlesnake\Enums\Direction;
 use Pluckypenguinphil\Battlesnake\Game;
 use Pluckypenguinphil\Battlesnake\Interfaces\IBrain;
 use Pluckypenguinphil\Battlesnake\Structs\Cell;
+use Pluckypenguinphil\Battlesnake\Structs\GameInstance;
 use Pluckypenguinphil\Battlesnake\Structs\GameObject;
 
 class HungrySnake implements IBrain
@@ -74,8 +75,9 @@ class HungrySnake implements IBrain
                     error_log("FOOD found at cell ".$current, E_USER_NOTICE);
                     break;
                 }
-                $neighbours = array_filter($current->neighbours, function ($neighbour) {
-                    return !in_array($neighbour->contents, [GameObject::HAZARD, GameObject::HEAD]);
+                $neighbours = array_filter($current->neighbours, function (Cell $neighbour) {
+                    return $neighbour->contents !== GameObject::HAZARD
+                        || ($neighbour->contents === GameObject::HEAD && $this->iAmBiggerThan($neighbour));
                 });
                 foreach ($neighbours as $neighbour) {
                     if (!array_key_exists($neighbour->id, $reached)) {
@@ -103,7 +105,10 @@ class HungrySnake implements IBrain
         foreach ($reached as $BID => $AID) {
             try {
                 $b = Game::instance()->board->getCellById($BID);
-                if ($b->contents === GameObject::FOOD) {
+                if (
+                    $b->contents === GameObject::FOOD
+                    || $b->contents === GameObject::HEAD
+                ) {
                     $target = $b;
                 }
             } catch (Exception) {
@@ -134,5 +139,21 @@ class HungrySnake implements IBrain
             $current = $steps[$current];
         }
         return array_reverse($path);
+    }
+
+    /**
+     * Check if I am bigger than the snake sitting at the given cell.
+     *
+     * @param  \Pluckypenguinphil\Battlesnake\Structs\Cell  $cell
+     *
+     * @return bool
+     */
+    private function iAmBiggerThan(Cell $cell): bool
+    {
+        $enemySnake = Game::instance()->board->getSnakeAtPosition($cell);
+        if (is_null($enemySnake)) {
+            return true;
+        }
+        return $enemySnake->length < Game::instance()->you->length;
     }
 }
