@@ -109,7 +109,7 @@ class HungrySnake implements IBrain
                     $b->contents === GameObject::FOOD
                     || (
                         $b->contents === GameObject::HEAD
-                        && Game::instance()->board->getSnakeAtPosition($b)->length < Game::instance()->you->length
+                        && (Game::instance()->board->getSnakeAtPosition($b)->length + 1) < Game::instance()->you->length
                     )
                 ) {
                     $target = $b;
