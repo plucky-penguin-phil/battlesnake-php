@@ -26,7 +26,7 @@ class BattleSnake
     {
         return new Response(
             [
-                'apiversion' => 1,
+                'apiversion' => '1',
                 'author'     => 'PluckyPenguin',
                 'color'      => '#FF0000',
                 'head'       => 'lantern-fish',

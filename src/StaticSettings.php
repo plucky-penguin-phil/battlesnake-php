@@ -6,7 +6,6 @@ use Pluckypenguinphil\Battlesnake\Traits\SingletonAccessor;
 
 /**
  * @property-read array $snake[apiversion, author, color, head, tail, version]
- * @property-read array $database[type, host, username, password, database]
  * @property-read array $app[debug]
  */
 class StaticSettings
