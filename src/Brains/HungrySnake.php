@@ -107,7 +107,10 @@ class HungrySnake implements IBrain
                 $b = Game::instance()->board->getCellById($BID);
                 if (
                     $b->contents === GameObject::FOOD
-                    || $b->contents === GameObject::HEAD
+                    || (
+                        $b->contents === GameObject::HEAD
+                        && Game::instance()->board->getSnakeAtPosition($b)->length < Game::instance()->you->length
+                    )
                 ) {
                     $target = $b;
                 }
