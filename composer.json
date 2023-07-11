@@ -16,10 +16,5 @@
     },
     "require-dev": {
         "symfony/var-dumper": "^5.4"
-    },
-  "scripts": {
-    "post-install-cmd": [
-      "php src/Console/initialize-database.php"
-    ]
-  }
+    }
 }

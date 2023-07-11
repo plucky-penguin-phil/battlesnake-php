@@ -2,17 +2,9 @@
 
 require_once "../vendor/autoload.php";
 
-$logPath = base_path('logs/'.date('Y-m-d', time()).'.log');
-
-ini_set('log_errors', 1);
-ini_set('error_log', $logPath);
-
 use Pluckypenguinphil\Battlesnake\BattleSnake;
-use Pluckypenguinphil\Battlesnake\Brains\SimpleBrain;
-use Pluckypenguinphil\Battlesnake\DB;
 use Pluckypenguinphil\Battlesnake\Game;
 use Pluckypenguinphil\Battlesnake\StaticSettings;
-use Pluckypenguinphil\Battlesnake\Structs\Response;
 
 $_POST = json_decode(file_get_contents('php://input') ?? '{}', true);
 
