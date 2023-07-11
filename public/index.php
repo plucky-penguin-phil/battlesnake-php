@@ -45,28 +45,3 @@ http_response_code($result->returnCode);
 
 echo $result->body;
 
-/**
- * Handle the script shutdown process.
- *
- * @param  string  $path
- * @param  \Pluckypenguinphil\Battlesnake\Structs\Response  $result
- *
- * @return void
- */
-function handleShutdown(string $path, Response $result): void
-{
-    $snake = json_decode($_REQUEST['you'] ?? '{}', true);
-    $data = [
-        'snake_id'   => $snake ? $snake['id'] : null,
-        'route'      => $path,
-        'request'    => json_encode($_REQUEST),
-        'response'   => $result->body,
-        'created_at' => date('Y-m-d H:i:s', time()),
-    ];
-    DB::pdo()->prepare(
-        "INSERT INTO requests(snake_id,route,request,response,created_at) VALUES(:snake_id,:route,:request,:response,:created_at)"
-    )
-        ->execute($data);
-}
-
-register_shutdown_function(fn() => handleShutdown($path, $result));
