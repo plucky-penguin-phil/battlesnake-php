@@ -157,6 +157,6 @@ class HungrySnake implements IBrain
         if (is_null($enemySnake)) {
             return true;
         }
-        return $enemySnake->length < Game::instance()->you->length;
+        return ($enemySnake->length + 1) < Game::instance()->you->length;
     }
 }
