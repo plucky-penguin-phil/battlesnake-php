@@ -1,10 +1,9 @@
 <?php
 
-echo __DIR__;
-
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use Pluckypenguinphil\Battlesnake\BattleSnake;
+use Pluckypenguinphil\Battlesnake\Brains\HungrySnake;
 use Pluckypenguinphil\Battlesnake\Game;
 use Pluckypenguinphil\Battlesnake\StaticSettings;
 
@@ -13,7 +12,7 @@ $_POST = json_decode(file_get_contents('php://input') ?? '{}', true);
 StaticSettings::instance();
 Game::instance();
 
-$battleSnake = new BattleSnake(new \Pluckypenguinphil\Battlesnake\Brains\HungrySnake());
+$battleSnake = new BattleSnake(new HungrySnake());
 
 $path = strtok($_SERVER['REQUEST_URI'], '?');
 
