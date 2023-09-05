@@ -16,7 +16,7 @@ class StaticSettings
 
     private function __construct()
     {
-        $this->settings = $_ENV;
+        $this->settings['snake'] = $_ENV;
     }
 
     public function __get($key)
