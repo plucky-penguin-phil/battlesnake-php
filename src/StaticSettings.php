@@ -16,7 +16,7 @@ class StaticSettings
 
     private function __construct()
     {
-        $this->settings = parse_ini_file(base_path('snake.ini'), true, INI_SCANNER_TYPED);
+        $this->settings = $_ENV;
     }
 
     public function __get($key)
