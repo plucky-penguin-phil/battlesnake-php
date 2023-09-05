@@ -27,11 +27,11 @@ class BattleSnake
         return new Response(
             [
                 'apiversion' => '1',
-                'author'     => 'PluckyPenguin',
-                'color'      => '#FF0000',
-                'head'       => 'lantern-fish',
-                'tail'       => 'small-rattle',
-                'version'    => '1.0.0',
+                'author'     => StaticSettings::instance()->snake['author' ] ?? 'PluckyPenguin',
+                'color'      => StaticSettings::instance()->snake['color']   ?? '#FF0000',
+                'head'       => StaticSettings::instance()->snake['head']    ?? 'lantern-fish',
+                'tail'       => StaticSettings::instance()->snake['tail']    ?? 'small-rattle',
+                'version'    => StaticSettings::instance()->snake['version'] ?? '1.0.0',
             ]
         );
     }
