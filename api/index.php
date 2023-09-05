@@ -1,6 +1,8 @@
 <?php
 
-require_once "../vendor/autoload.php";
+echo __DIR__;
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use Pluckypenguinphil\Battlesnake\BattleSnake;
 use Pluckypenguinphil\Battlesnake\Game;
